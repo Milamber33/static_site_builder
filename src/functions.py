@@ -126,7 +126,7 @@ def block_to_block_type(block):
     lines = block.split("\n")
     blockquote = True
     for l in lines:
-        if l[:2] != "> ":
+        if l[:1] != ">":
             blockquote = False
     if blockquote:
         return "blockquote"
