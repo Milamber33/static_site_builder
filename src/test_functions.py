@@ -57,7 +57,7 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(split_nodes_delimiter([text_node], "**", TextType.BOLD), output)
 
     def test_split_italic(self):
-        text_node = TextNode("*This* is a text node", TextType.TEXT)
+        text_node = TextNode("_This_ is a text node", TextType.TEXT)
         output = [
             TextNode("This", TextType.ITALIC),
             TextNode(" is a text node", TextType.TEXT),
@@ -116,7 +116,7 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(split_nodes_link([node]), output)
         
     def test_split_all(self):
-        text = "This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
+        text = "This is **text** with an _italic_ word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
         output = [
             TextNode("This is ", TextType.TEXT),
             TextNode("text", TextType.BOLD),
@@ -132,10 +132,10 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(text_to_textnodes(text), output)
     
     def test_split_blocks(self):
-        text = "  # This is a heading\n\n\n\nThis is a paragraph of text. It has some **bold** and *italic* words inside of it.\n\n\n* This is the first list item in a list block\n* This is a list item\n* This is another list item\n\n"
+        text = "  # This is a heading\n\n\n\nThis is a paragraph of text. It has some **bold** and _italic_ words inside of it.\n\n\n* This is the first list item in a list block\n* This is a list item\n* This is another list item\n\n"
         output = [
             "# This is a heading",
-            "This is a paragraph of text. It has some **bold** and *italic* words inside of it.",
+            "This is a paragraph of text. It has some **bold** and _italic_ words inside of it.",
             "* This is the first list item in a list block\n* This is a list item\n* This is another list item"
         ]
         self.assertEqual(markdown_to_blocks(text), output)
@@ -206,7 +206,7 @@ class TestFunctions(unittest.TestCase):
 ###### This is a third heading
 
 
-This is a paragraph of text. It has some **bold** and *italic* words inside of it.
+This is a paragraph of text. It has some **bold** and _italic_ words inside of it.
 
 *This is the first list item in a list block
 *This is a list item
@@ -229,7 +229,7 @@ a code block```
 >This is
 >a blockquote
 
-This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)
+This is **text** with an _italic_ word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)
 """
         output = ParentNode('div', [
             ParentNode("h1", [LeafNode(None, "This is a heading")]),
@@ -285,7 +285,7 @@ This is **text** with an *italic* word and a `code block` and an ![obi wan image
 ###### This is a third heading
 
 
-This is a paragraph of text. It has some **bold** and *italic* words inside of it.
+This is a paragraph of text. It has some **bold** and _italic_ words inside of it.
 
 *This is the first list item in a list block
 *This is a list item
@@ -308,7 +308,7 @@ a code block```
 >This is
 >a blockquote
 
-This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)
+This is **text** with an _italic_ word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)
 """        
         output = "This is a heading"
         self.assertEqual(extract_title(test), output)
